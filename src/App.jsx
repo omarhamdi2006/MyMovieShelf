@@ -1,17 +1,14 @@
-import { Route,Routes,Link, BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./Home.jsx";
 function App() {
-  return(
+  return (
     <>
-
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
-    
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </>
-  )
+  );
 }
-
 
 export default App;
