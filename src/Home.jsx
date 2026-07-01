@@ -1,11 +1,15 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
+import SearchBar from "./SearchBar";
 const imdbKey = import.meta.env.VITE_MYKEY;
 
 export default function Home() {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [movieTitles, setMovieTitles] = useState([
     "Prison Break",
@@ -17,7 +21,7 @@ export default function Home() {
     "Dexter",
     "John Wick",
   ]);
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState([]);
   const [currMovie, setCurrMovie] = useState(null);
   const [title, setTitle] = useState("");
   useEffect(() => {
@@ -53,11 +57,6 @@ export default function Home() {
           setMovieTitles(results);
           setLoading(false);
         }
-
-        console.log("--- ALL MOVIE OBJECTS ---");
-        results.forEach((movie) => {
-          console.log(movie);
-        });
       } catch (error) {
         console.error("Error in fetch movies", error);
       }
@@ -70,20 +69,55 @@ export default function Home() {
       setLoading(false);
     };
   }, []);
+
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   const searchData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const res = await fetch(
+  //         `http://www.omdbapi.com/?t=${query.replaceAll(" ", "+")}&apikey=${imdbKey}`,
+  //       );
+
+  //       if (!res.ok) throw new Error(`Error searching, status:${res.status}`);
+  //       const data = await res.json();
+  //       setMovieTitles(data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error(error.msg);
+  //     }
+  //   };
+
+  //   // searchData();
+
+  //   return () => {
+  //     setLoading(false);
+  //   };
+  // }, [query]);
+
+  // const queryChange = (e) => {
+  //   setQuery(e.target.value);
+  // };
   return (
     <>
-      <div className=""></div>
       <Navbar />
       <h1 className="text-3xl font-bold text-center">
         Find The Perfect Movie For The Night
       </h1>
+      <p className="text-xl text-center text-gray-800 mt-2">
+        You can search your favorite movie and series.
+      </p>
       {/* Search Box Here */}
+      <div className="flex items-center justify-center my-5">
+        {" "}
+        {/* <SearchBar query={query} queryChange={queryChange} /> */}
+      </div>
       <div className="px-20 py-7 flex flex-row gap-5 flex-wrap">
         {/* Movie cards container */}
         {loading ? (
           <Loading msg={"Movies"} />
         ) : (
-          movieTitles.map((m) => <MovieCard data={m} />)
+          movieTitles.map((m) => <MovieCard key={m.imdbID} data={m} />)
         )}
       </div>
     </>
