@@ -49,17 +49,49 @@ export default function Home() {
 }
 
 // Initial Fetch
-    // useEffect(()=>{
+    useEffect(()=>{ 
+      const initFetch = async () =>{
+        const initialList = [
+          "Fight Club",
+          "Pulp Fiction",
+          "Catch me if you can",
+          "Breaking Bad",
+          "Training Day",
+          "Oppenheimer"
+        ]
 
-    // },[])
+        setLoading(true)
+        try{
+          const fetchPromises =initialList.map( async (title) => {
+            const encodedTitle = encodeURIComponent(title)
+            const url = `http://www.omdbapi.com/?apikey=${imdbKey}&t=${encodedTitle}`
+            const res = await fetch(url);
+            return res.json()
+          })
+
+          const moviesData = await Promise.all(fetchPromises)
+
+          const fetchedMovies = moviesData.filter((movie) => movie.Response === "True")
+          setResults(fetchedMovies)
+
+
+        }catch(error){
+          throw new Error(error)
+        }finally{
+          setLoading(false)
+        }
+      }
+      initFetch()
+    },[])
 
 
   return (
     <>
       <Navbar />
-      <h1 className="text-3xl font-bold text-center">
-        Find The Perfect Movie For The Night
-      </h1>
+      <div className="flex flex-col items-center justify-center text-center mt-8 flex-wrap">
+        <h1 className="text-5xl font-black">Find, Store and Rate you favourite movies in your <span className="underline">
+          <Link to="/shelf">Shelf</Link></span> ! </h1>
+      </div>
       <p className="text-xl text-center text-gray-800 mt-2">
         You can search your favorite movie and series.
       </p>
@@ -68,7 +100,7 @@ export default function Home() {
         {" "}
         <SearchBar query={query} setQuery={setQuery} fetchMovies={fetchMovies} /> 
       </div>
-      <div className="px-20 py-7 flex flex-row gap-5 flex-wrap">
+      <div className="px-20 py-7 flex flex-row items-center justify-center gap-5 flex-wrap">
         {/* Movie cards container */}
         {
           loading ? 
@@ -80,7 +112,7 @@ export default function Home() {
         )
         }
         {
-         !error.length !== 0  && (<p>{error}</p>)
+         (error.length !== 0)  && (<p>{error}</p>)
         }
       
     
