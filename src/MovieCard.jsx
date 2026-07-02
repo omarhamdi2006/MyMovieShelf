@@ -1,4 +1,11 @@
-export default function MovieCard({ data }) {
+export default function MovieCard({ data , setShelfMovie,TransferMovies}) {
+
+
+  const handleShelfMovies=()=>{
+    setShelfMovie({"title": data.Title,"poster":data.Poster,"year":data.Year})
+    TransferMovies()
+  }
+
   return (
     <div className="p-4 w-3xs shadow-gray-950 flex flex-col justify-center items-start gap-3 bg-gray-100 rounded-xl">
       <img className="w-1/1 h-80 rounded-xl" src={data.Poster} />
@@ -11,7 +18,9 @@ export default function MovieCard({ data }) {
         <div className="bg-black text-gray-100 rounded-lg px-2.5 py-1 font-semibold cursor-pointer  hover:bg-gray-700">
           Show Details
         </div>
-        <div className="bg-black text-gray-100 rounded-lg px-2.5 py-1 font-semibold cursor-pointer  hover:bg-gray-700">
+        <div
+        onClick={handleShelfMovies}
+        className="bg-black text-gray-100 rounded-lg px-2.5 py-1 font-semibold cursor-pointer  hover:bg-gray-700">
           Add to Shelf
         </div>
 
