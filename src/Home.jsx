@@ -116,7 +116,7 @@ export default function Home() {
           !{" "}
         </h1>
       </div>
-      <p className="text-xl text-center text-gray-800 mt-2">
+      <p className="text-xl text-center mt-2">
         You can search your favorite movie and series.
       </p>
       {/* Search Box Here */}

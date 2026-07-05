@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@theme{
+    --color-main: #F68048;
+    --color-back: #0D1A63;
+}
+
+@layer base {
+    body{
+        @apply bg-back text-main;
+    }
+}
