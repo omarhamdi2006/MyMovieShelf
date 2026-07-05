@@ -1,9 +1,8 @@
-export default function MovieCard({ data , setShelfMovie,TransferMovies}) {
+export default function MovieCard({ data , addMovieToShelf}) {
 
 
   const handleShelfMovies=()=>{
-    setShelfMovie({"title": data.Title,"poster":data.Poster,"year":data.Year})
-    TransferMovies()
+    addMovieToShelf({"title": data.Title,"poster":data.Poster,"year":data.Year})
   }
 
   return (

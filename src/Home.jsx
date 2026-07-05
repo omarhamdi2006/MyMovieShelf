@@ -16,7 +16,10 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
   // movies added to shelf
-  const [shelfMovies, setShelfMovies] = useState([]);
+  const [shelfMovies, setShelfMovies] = useState(()=>{
+      const storedMovies = localStorage.getItem("movies")
+      return storedMovies ? JSON.parse(storedMovies) : []
+  });
 
 
           const navigate = useNavigate();
@@ -24,21 +27,18 @@ export default function Home() {
 
   // add to shelf
   const addMovieToShelf = (movie) => {
-     setShelfMovies((prevShelfMovies) => [...(prevShelfMovies),movie]);
-     
+          const savedStrings = localStorage.getItem("movies")
+          const arrayOfMovies = savedStrings ? JSON.parse(savedStrings) : [];
+          const updatedMovies = [...arrayOfMovies,movie]
 
-    //  console.log([...shelfMovies,movie])
-  };
-  const TransferMovies = (shelfMovies) =>{
-         //navigate function
-    
-          //save to local storage key
-          localStorage.setItem("movies",JSON.stringify(shelfMovies))
-
+          setShelfMovies(updatedMovies)
+          localStorage.setItem("movies",JSON.stringify(updatedMovies))
           // navigate
           navigate("/shelf")
 
-  }
+    //  console.log([...shelfMovies,movie])
+  };
+
   //fetch movies
 
   const fetchMovies = async (SearchQuery) => {
@@ -133,7 +133,7 @@ export default function Home() {
         {loading ? (
           <Loading />
         ) : (
-          results.map((movie) => <MovieCard key={movie.imdbID} data={movie} setShelfMovie={addMovieToShelf} TransferMovies={TransferMovies}/>)
+          results.map((movie) => <MovieCard key={movie.imdbID} data={movie} addMovieToShelf={addMovieToShelf} />)
         )}
         {error.length !== 0 && <p>{error}</p>}
       </div>
