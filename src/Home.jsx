@@ -83,7 +83,7 @@ export default function Home() {
       try {
         const fetchPromises = initialList.map(async (title) => {
           const encodedTitle = encodeURIComponent(title);
-          const url = `http://www.omdbapi.com/?apikey=${imdbKey}&t=${encodedTitle}`;
+          const url = `https://www.omdbapi.com/?apikey=${imdbKey}&t=${encodedTitle}`;
           const res = await fetch(url);
           return res.json();
         });
