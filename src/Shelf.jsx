@@ -69,7 +69,7 @@ export default function Shelf() {
   return (
     <>
       <Navbar />
-      {!recievedMovies ?       <div className="shelf-container flex flex-col w-full h-max  font-text items-center">
+      {recievedMovies.length > 0 ?       <div className="shelf-container flex flex-col w-full h-max  font-text items-center">
         {recievedMovies.map((movieObj)=>(
           <div className="movie-card m-8 flex flex-row flex-wrap md:flex-nowrap gap-10 text-wrap w-[80%] bg-gray-950 p-5 rounded-xl  " key={movieObj.title}>
             <img className="w-50" src={movieObj.poster}/>
@@ -102,13 +102,13 @@ export default function Shelf() {
           cursor-pointer hover:scale-101 hover:bg-amber-600 transition-all duration-150">clear list</button>
 
       </div>
- : 
+ : (
       <div className="my-10 font-text"> 
       <h1 className="text-center text-4xl">you didn't add any movies to the shelf</h1>
             <h1 className="text-center text-4xl">Search for your Movie in <Link to="/" className="font-black underline">Home</Link></h1>
 
 
-      </div>
+      </div>)
       }
       <Footer/>
     </>
