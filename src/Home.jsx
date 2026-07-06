@@ -5,6 +5,7 @@ import MovieCard from "./MovieCard";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
 import SearchBar from "./SearchBar";
+import Footer from "./Footer";
 const imdbKey = import.meta.env.VITE_MYKEY;
 
 export default function Home() {
@@ -16,25 +17,23 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
   // movies added to shelf
-  const [shelfMovies, setShelfMovies] = useState(()=>{
-      const storedMovies = localStorage.getItem("movies")
-      return storedMovies ? JSON.parse(storedMovies) : []
+  const [shelfMovies, setShelfMovies] = useState(() => {
+    const storedMovies = localStorage.getItem("movies");
+    return storedMovies ? JSON.parse(storedMovies) : [];
   });
 
-
-          const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   // add to shelf
   const addMovieToShelf = (movie) => {
-          const savedStrings = localStorage.getItem("movies")
-          const arrayOfMovies = savedStrings ? JSON.parse(savedStrings) : [];
-          const updatedMovies = [...arrayOfMovies,movie]
+    const savedStrings = localStorage.getItem("movies");
+    const arrayOfMovies = savedStrings ? JSON.parse(savedStrings) : [];
+    const updatedMovies = [...arrayOfMovies, movie];
 
-          setShelfMovies(updatedMovies)
-          localStorage.setItem("movies",JSON.stringify(updatedMovies))
-          // navigate
-          navigate("/shelf")
+    setShelfMovies(updatedMovies);
+    localStorage.setItem("movies", JSON.stringify(updatedMovies));
+    // navigate
+    navigate("/shelf");
 
     //  console.log([...shelfMovies,movie])
   };
@@ -107,7 +106,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center text-center mt-8 flex-wrap">
+      <div className="flex flex-col items-center justify-center text-center mt-8 flex-wrap mx-2 ">
         <h1 className="text-5xl font-black">
           Find, Store and Rate you favourite movies in your{" "}
           <span className="underline">
@@ -116,11 +115,11 @@ export default function Home() {
           !{" "}
         </h1>
       </div>
-      <p className="text-xl text-center mt-2">
+      <p className="text-xl text-center mt-2 font-text">
         You can search your favorite movie and series.
       </p>
       {/* Search Box Here */}
-      <div className="flex items-center justify-center my-5">
+      <div className="flex items-center justify-center my-5 flex-wrap">
         {" "}
         <SearchBar
           query={query}
@@ -133,10 +132,18 @@ export default function Home() {
         {loading ? (
           <Loading />
         ) : (
-          results.map((movie) => <MovieCard key={movie.imdbID} data={movie} addMovieToShelf={addMovieToShelf} />)
+          results.map((movie) => (
+            <MovieCard
+              key={movie.imdbID}
+              data={movie}
+              addMovieToShelf={addMovieToShelf}
+            />
+          ))
         )}
         {error.length !== 0 && <p>{error}</p>}
       </div>
+
+      <Footer/>
     </>
   );
 }

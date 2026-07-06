@@ -11,9 +11,9 @@ export default function SearchBar({ query,setQuery,fetchMovies }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-      <div className="flex items-center justify-center border-main border-2 rounded-3xl text-start px-5 pr-0 py-1.25">
+      <div className="flex items-center justify-center border-main border-2 rounded-3xl  px-5 text-left pr-0 py-1.25 font-text">
         <input
-          className="outline-none w-xl"
+          className="outline-none text-left md:w-200"
           type={"text"}
           value={query}
           placeholder="ex: Breaking Bad"
@@ -22,7 +22,8 @@ export default function SearchBar({ query,setQuery,fetchMovies }) {
         <button
           type="submit"
           onClick={handleSearchClick}
-          className="bg-main font-bold text-black rounded-2xl px-2.5 py-1.25 cursor-pointer  hover:bg-gray-700 "
+          className="bg-main font-bold text-black rounded-2xl px-2.5 py-1.25 cursor-pointer  hover:bg-back hover:text-white 
+        transition-all duration-150 "
           style={{ marginTop: "-20px", marginBottom: "-20px" }}
         >
           Search

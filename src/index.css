@@ -1,12 +1,22 @@
+/* Logo Font */
+@import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
+/* Text Font */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap');
+
+
 @import "tailwindcss";
 
 @theme{
-    --color-main: #F68048;
-    --color-back: #0D1A63;
+    --color-main: #1F7D53;
+    --color-back: #1A1A1A;
+    --font-logo: "Days One", sans-serif;
+    --font-text: "M PLUS 1", sans-serif;
 }
 
 @layer base {
     body{
-        @apply bg-back text-main;
+        @apply bg-gray-900 text-main;
+
     }
 }
+
