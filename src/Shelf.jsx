@@ -71,7 +71,7 @@ export default function Shelf() {
       <Navbar />
       {recievedMovies.length > 0 ?       <div className="shelf-container flex flex-col w-full h-max  font-text items-center">
         {recievedMovies.map((movieObj)=>(
-          <div className="movie-card m-8 flex flex-row flex-wrap md:flex-nowrap gap-10 text-wrap w-[80%] bg-gray-950 p-5 rounded-xl  " key={movieObj.title}>
+          <div className="movie-card m-8 flex flex-row flex-wrap md:flex-nowrap gap-10 text-wrap w-[80%] bg-card p-5 rounded-xl  " key={movieObj.title}>
             <img className="w-50" src={movieObj.poster}/>
             <div className="text flex flex-col">
               <h3 className="font-bold text-2xl">{movieObj.title}</h3>
@@ -92,7 +92,7 @@ export default function Shelf() {
                 value={notes[movieObj.title]}
                  onChange={(e) => handleNotes(movieObj.title,e.target.value)} ></input>
                 <button onClick={()=> removeMovie(movieObj.title)} className="rounded-md p-1 bg-main  text-gray-950 font-black w-max 
-                font-text cursor-pointer hover:scale-101 hover:bg-amber-600 transition-all duration-150">remove from shelf</button>
+                font-text cursor-pointer hover:scale-101 hover:bg-back hover:text-white hover:border-1 hover:border-white transition-all duration-150">remove from shelf</button>
               </div>
             </div>
 

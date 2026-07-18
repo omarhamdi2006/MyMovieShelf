@@ -46,11 +46,11 @@ export default function Home() {
     }
     setLoading(true);
     const encodedQuery = encodeURIComponent(SearchQuery);
-    const url = `https://www.omdbapi.com/?apikey=${imdbKey}&s=${encodedQuery}`;
+    const url = `https://www.omdbapi.com/?apikey=${imdbKey}&t=${encodedQuery}`;
     try {
       const res = await fetch(url);
       const data = await res.json();
-
+      
       if (data.Response === "True") {
         setResults(data.Search);
       } else {
@@ -103,6 +103,7 @@ export default function Home() {
     initFetch();
   }, []);
 
+  
   return (
     <>
       <Navbar />
