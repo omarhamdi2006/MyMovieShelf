@@ -4,7 +4,7 @@ A modern web application for discovering, searching, and managing your personal 
 
 ## Overview
 
-MyMovieShelf is a React-based movie discovery and management application that allows users to search for movies and TV series using the OMDB API, save them to a personal shelf, and view detailed information about each title.
+MyMovieShelf is a React-based movie discovery and management application that allows users to search for movies and TV series using the OMDB API, save them to a personal shelf in the local storage of your browser, and view detailed information about each title.
 
 ## Live Demo
 
