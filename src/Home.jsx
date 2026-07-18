@@ -28,8 +28,18 @@ export default function Home() {
   const addMovieToShelf = (movie) => {
     const savedStrings = localStorage.getItem("movies");
     const arrayOfMovies = savedStrings ? JSON.parse(savedStrings) : [];
-    const updatedMovies = [...arrayOfMovies, movie];
 
+    // check duplicate movies
+    const isDuplicate = arrayOfMovies.some(
+      (item) => item.title.toLowerCase() === movie.title.toLowerCase()
+      );
+
+    if (isDuplicate) {
+    alert("Movie is already in your Shelf")
+    return; 
+  }
+  // if movie not in shelf add it
+    const updatedMovies = [...arrayOfMovies, movie];
     setShelfMovies(updatedMovies);
     localStorage.setItem("movies", JSON.stringify(updatedMovies));
     // navigate
@@ -108,7 +118,7 @@ export default function Home() {
     <>
       <Navbar />
       <div className="flex flex-col items-center justify-center text-center mt-8 flex-wrap mx-2 ">
-        <h1 className="text-5xl font-black">
+        <h1 className="text-3xl sm:text-5xl font-black">
           Find, Store and Rate you favourite movies in your{" "}
           <span className="underline">
             <Link to="/shelf">Shelf</Link>
@@ -116,11 +126,11 @@ export default function Home() {
           !{" "}
         </h1>
       </div>
-      <p className="text-xl text-center mt-2 font-text">
+      <p className="text-xl text-center mt-2 font-text mx-2">
         You can search your favorite movie and series.
       </p>
       {/* Search Box Here */}
-      <div className="flex items-center justify-center my-5 flex-wrap">
+      <div className="flex items-center justify-center my-5 flex-wrap ">
         {" "}
         <SearchBar
           query={query}
@@ -141,7 +151,7 @@ export default function Home() {
             />
           ))
         )}
-        {error.length !== 0 && <p>{error}</p>}
+        {(error.length !== 0 || movies.length === 0) && (<p>{error}</p>)}
       </div>
 
       <Footer/>

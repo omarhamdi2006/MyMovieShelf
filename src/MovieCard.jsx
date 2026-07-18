@@ -15,11 +15,11 @@ export default function MovieCard({ data , addMovieToShelf}) {
 
   return (
     <div className="p-4 w-3xs h-137.5  shadow-gray-950 flex flex-col justify-between items-start gap-1 bg-card rounded-xl font-text ">
-       <img className="w-full h-80 rounded-xl" src={imageSrc} onError={()=>{
+       <img className="w-full h-80 rounded-xl object-cover shrink-0" src={imageSrc} onError={()=>{
         setImageSrc("https://placehold.co/600x750?text=Image+Not+Found")
        }} /> 
       
-      <h2  className="font-bold text-2xl text-main">{data.Title}</h2>
+      <h2  className="font-bold text-2xl text-main ">{data.Title}</h2>
       <p className="">{data.Year}</p>
       <p className="">{data.Type}</p>
 

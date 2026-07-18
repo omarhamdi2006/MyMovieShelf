@@ -85,16 +85,16 @@ export default function Shelf() {
                 </span></p>
               
               
-              <div className="user-note flex flex-col gap-2">
-                <p className="bg-back w-max px-2 rounded-sm text-lg ">User note : </p>
-                <input type="text" placeholder="What do you think about the movie ? ...." 
-                 className="text-lg  text-wrap mb-2 outline-none"
-                value={notes[movieObj.title]}
-                 onChange={(e) => handleNotes(movieObj.title,e.target.value)} ></input>
-                <button onClick={()=> removeMovie(movieObj.title)} className="rounded-md p-1 bg-main  text-gray-950 font-black w-max 
-                font-text cursor-pointer hover:scale-101 hover:bg-back hover:text-white hover:border-1 hover:border-white transition-all duration-150">remove from shelf</button>
-              </div>
-            </div>
+<div className="user-note flex flex-col gap-2 w-full min-w-0">
+  <p className="bg-back w-max px-2 rounded-sm text-lg">User note : </p>
+  <textarea 
+    placeholder="What do you think about the movie ? ...." 
+    className="text-lg mb-2 outline-none w-[80%] bg-transparent resize-none"
+    rows="2"
+    value={notes[movieObj.title] || ''}
+    onChange={(e) => handleNotes(movieObj.title, e.target.value)} 
+  />
+</div></div>
 
           </div>
         ))}
