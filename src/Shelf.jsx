@@ -94,11 +94,15 @@ export default function Shelf() {
     value={notes[movieObj.title] || ''}
     onChange={(e) => handleNotes(movieObj.title, e.target.value)} 
   />
-</div></div>
+  </div>
+          <button onClick={()=>{removeMovie(movieObj.title)}} className="button rounded-md p-1 bg-main  text-gray-950 font-black font-text 
+          cursor-pointer hover:scale-101 hover:bg-amber-600 transition-all duration-150 w-max">delete movie</button>
 
+    </div>
+          
           </div>
         ))}
-          <button onClick={clearMovies} className="rounded-md p-1 bg-main  text-gray-950 font-black font-text 
+          <button onClick={clearMovies} className="button rounded-md p-1 bg-main  text-gray-950 font-black font-text 
           cursor-pointer hover:scale-101 hover:bg-amber-600 transition-all duration-150">clear list</button>
 
       </div>
