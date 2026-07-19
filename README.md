@@ -8,7 +8,7 @@ MyMovieShelf is a React-based movie discovery and management application that al
 
 ## Live Demo
 
-The application is deployed and available at: https://my-movie-shelf-three.vercel.app
+The application is deployed and available at: https://mymovieshelf.pages.dev/
 
 ## Features
 
